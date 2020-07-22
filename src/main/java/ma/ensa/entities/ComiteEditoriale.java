@@ -15,6 +15,11 @@ public class ComiteEditoriale {
 	private Long idComite;
 	private String nom;
 	
+//	@OneToOne(mappedBy = "comite", fetch = FetchType.LAZY)
+//	@JsonIgnore
+//	private EvaluationComite evaluation;
+
+	
 	
 	@OneToMany(mappedBy = "comite", fetch = FetchType.LAZY)
 	@JsonIgnore

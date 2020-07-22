@@ -1,12 +1,11 @@
 package ma.ensa.services.impl;
 
 import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-
 import ma.ensa.dao.IUtilisateurDao;
-import ma.ensa.entities.Referee;
 import ma.ensa.entities.Utilisateur;
 import ma.ensa.services.IUtilisateurService;
 
@@ -51,6 +50,11 @@ public class UtilisateurService implements IUtilisateurService{
 			return true;
 		}
 		return false;
+	}
+
+	@Override
+	public Page<Utilisateur> chercherUtilisateurs(String mc, Pageable pageable) {
+		return utilisateurDao.getPage(mc, pageable);
 	}
 
 }

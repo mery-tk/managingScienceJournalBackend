@@ -17,9 +17,9 @@ public class Auteur extends Utilisateur{
 	private boolean corresponsance;
 	
 	
-//	@ManyToMany(mappedBy = "auteurs", fetch = FetchType.LAZY)
-//	@JsonIgnore
-//	private List<Article> articles = new ArrayList<Article>();
+	@ManyToMany(mappedBy = "auteurs", fetch = FetchType.LAZY)
+	@JsonIgnore
+	private List<Article> articles = new ArrayList<Article>();
 	
 	public Auteur() {
 		super();

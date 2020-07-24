@@ -46,7 +46,7 @@ public class UtilisateurController {
 	}
 	
 	
-	@GetMapping(value = "/utilisateurs")
+	@GetMapping(value = "/Utilisateurs")
 	public Page<Utilisateur> chercher(@RequestParam(name = "mc", defaultValue = "")String mc,
 			@RequestParam(name = "page", defaultValue = "0")int page,
 			@RequestParam(name = "size", defaultValue = "4")int size){

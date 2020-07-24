@@ -5,23 +5,29 @@ import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class ComiteEditoriale {
 
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long idComite;
 	private String nom;
 	
-//	@OneToOne(mappedBy = "comite", fetch = FetchType.LAZY)
-//	@JsonIgnore
-//	private EvaluationComite evaluation;
+	@OneToOne(mappedBy = "comite", fetch = FetchType.LAZY)
+	@JsonIgnore
+	private EvaluationComite evaluation;
 
 	
 	
-	@OneToMany(mappedBy = "comite", fetch = FetchType.LAZY)
+	@OneToMany(mappedBy = "comiteEditoriale", fetch = FetchType.LAZY)
 	@JsonIgnore
 	private List<Utilisateur> utilisateurs = new ArrayList<Utilisateur>();
 

@@ -13,9 +13,9 @@ public class Referee extends Utilisateur{
 
 	private int nbrArticlesEvaluees;
 	
-//	@OneToOne(mappedBy = "referee", fetch = FetchType.LAZY)
-//	@JsonIgnore
-//	private EvaluationReferee evaluation;
+	@OneToOne(mappedBy = "referee", fetch = FetchType.LAZY)
+	@JsonIgnore
+	private EvaluationReferee evaluation;
 
 	public Referee() {
 		super();

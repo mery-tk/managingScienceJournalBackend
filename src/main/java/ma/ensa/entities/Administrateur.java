@@ -9,7 +9,7 @@ import javax.persistence.PrimaryKeyJoinColumn;
 @PrimaryKeyJoinColumn(name = "idAdmin")
 public class Administrateur extends Utilisateur {
 
-	private Date debutfonction;
+	private Date debutFonction;
 	private Date finFonction;
 	
 	
@@ -19,20 +19,20 @@ public class Administrateur extends Utilisateur {
 
 
 	public Administrateur(String nom, String prenom, String email, Long telephone, String adresse, String username,
-			String password, Date debutfonction, Date finFonction) {
+			String password, Date debutFonction, Date finFonction) {
 		super( nom, prenom, email, telephone, adresse, username, password);
-		this.debutfonction = debutfonction;
+		this.debutFonction = debutFonction;
 		this.finFonction = finFonction;
 	}
 
 
 	public Date getDebutfonction() {
-		return debutfonction;
+		return debutFonction;
 	}
 
 
-	public void setDebutfonction(Date debutfonction) {
-		this.debutfonction = debutfonction;
+	public void setDebutfonction(Date debutFonction) {
+		this.debutFonction = debutFonction;
 	}
 
 

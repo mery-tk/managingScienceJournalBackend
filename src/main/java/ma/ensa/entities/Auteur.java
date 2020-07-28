@@ -14,7 +14,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 public class Auteur extends Utilisateur{
 	
 	private int nbrArticlesEcrites;
-	private boolean corresponsance;
+	private boolean correspondance;
 	
 	
 	@ManyToMany(mappedBy = "auteurs", fetch = FetchType.LAZY)
@@ -31,10 +31,10 @@ public class Auteur extends Utilisateur{
 	}
 
 	public Auteur(String nom, String prenom, String email, Long telephone, String adresse, String username,
-			String password, int nbrArticlesEcrites, boolean corresponsance) {
+			String password, int nbrArticlesEcrites, boolean correspondance) {
 		super(nom, prenom, email, telephone, adresse, username, password);
 		this.nbrArticlesEcrites = nbrArticlesEcrites;
-		this.corresponsance = corresponsance;
+		this.correspondance = correspondance;
 	}
 
 	public int getNbrArticlesEcrites() {
@@ -46,11 +46,11 @@ public class Auteur extends Utilisateur{
 	}
 
 	public boolean isCorresponsance() {
-		return corresponsance;
+		return correspondance;
 	}
 
-	public void setCorresponsance(boolean corresponsance) {
-		this.corresponsance = corresponsance;
+	public void setCorresponsance(boolean correspondance) {
+		this.correspondance = correspondance;
 	}
 	
 	

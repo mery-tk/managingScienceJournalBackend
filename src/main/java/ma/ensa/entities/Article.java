@@ -30,7 +30,7 @@ public class Article {
 	@JsonIgnore
 	@JoinTable(name = "article_auteur",
 	joinColumns = { @JoinColumn(name="idArticle")},
-	inverseJoinColumns ={ @JoinColumn(name="idUtilisateur")} )
+	inverseJoinColumns ={ @JoinColumn(name="idAuteur")} )
 	private List<Auteur> auteurs;
 	
 	////////////////////////////

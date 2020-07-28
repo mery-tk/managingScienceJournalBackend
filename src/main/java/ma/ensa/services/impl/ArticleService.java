@@ -37,8 +37,6 @@ public class ArticleService implements IArticleService{
        art.setResume(article.getResume());
        art.setTitre(article.getTitre());
        return articleDao.save(art);
-       
-
 	}
 
 	@Override
@@ -47,8 +45,7 @@ public class ArticleService implements IArticleService{
 			articleDao.deleteById(idArticle);
 			return true;
 		}
-		return false;}
-
+		return false;
+	}
 		
-	
 }

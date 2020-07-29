@@ -2,9 +2,11 @@ package ma.ensa.entities;
 
 import java.io.Serializable;
 
+import javax.persistence.Embeddable;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+@Embeddable
 public class Correspondance_PK implements Serializable{
 
 	/**

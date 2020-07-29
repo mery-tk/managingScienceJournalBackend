@@ -5,6 +5,7 @@ import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.PrimaryKeyJoinColumn;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -17,9 +18,13 @@ public class Auteur extends Utilisateur{
 	private boolean correspondance;
 	
 	
-	@ManyToMany(mappedBy = "auteurs", fetch = FetchType.LAZY)
-	@JsonIgnore
-	private List<Article> articles = new ArrayList<Article>();
+//	@ManyToMany(mappedBy = "auteurs", fetch = FetchType.LAZY)
+//	@JsonIgnore
+//	private List<Article> articles = new ArrayList<Article>();
+	
+	
+	@OneToMany(mappedBy ="correspondance_PK.auteurs")
+	private List<Article> articles=new ArrayList<Article>();
 	
 	public Auteur() {
 		super();

@@ -1,5 +1,6 @@
 package ma.ensa.entities;
 
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -25,12 +26,12 @@ public class Article {
 	private String contenu;
 	private String etat;
 	
-	@ManyToMany
-	@LazyCollection(LazyCollectionOption.FALSE)
-	@JoinTable(name = "article_auteur",
-	joinColumns = { @JoinColumn(name="idArticle")},
-	inverseJoinColumns ={ @JoinColumn(name="idAuteur")} )
-	private List<Auteur> auteurs;
+//	@ManyToMany
+//	@LazyCollection(LazyCollectionOption.FALSE)
+//	@JoinTable(name = "article_auteur",
+//	joinColumns = { @JoinColumn(name="idArticle")},
+//	inverseJoinColumns ={ @JoinColumn(name="idAuteur")} )
+//	private List<Auteur> auteurs;
 	
 	////////////////////////////
 	
@@ -39,6 +40,11 @@ public class Article {
 	@LazyCollection(LazyCollectionOption.FALSE)
 	@JsonIgnore
 	private  List<Evaluation> listEvaluation;
+	
+	
+	@OneToMany(mappedBy = "correspondance_PK.articles")
+	private List<Auteur> auteurs=new ArrayList<Auteur>();
+	
 	
 	/////////////////////////////
 	public Long getIdArticle() {

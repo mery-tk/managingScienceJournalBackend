@@ -1,7 +1,11 @@
 package ma.ensa.entities;
 
+import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
+@Entity
+@Table(name="Correspondance") 
 public class Correspondance {
 
 	@Id
@@ -21,6 +25,19 @@ public class Correspondance {
 	}
 	public void setCorrespondance(boolean correspondance) {
 		this.correspondance = correspondance;
+	}
+	public Correspondance(Correspondance_PK correspondance_PK, boolean correspondance) {
+		super();
+		this.correspondance_PK = correspondance_PK;
+		this.correspondance = correspondance;
+	}
+	
+	public Correspondance(Article article, Auteur auteur, boolean correspondance) { 
+		this.correspondance_PK = new Correspondance_PK(article,auteur); 
+		this.correspondance = correspondance;
+	}
+	public Correspondance() {
+		super();
 	}
 	
 	

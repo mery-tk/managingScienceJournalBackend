@@ -27,7 +27,6 @@ public class Article {
 	
 	@ManyToMany
 	@LazyCollection(LazyCollectionOption.FALSE)
-	@JsonIgnore
 	@JoinTable(name = "article_auteur",
 	joinColumns = { @JoinColumn(name="idArticle")},
 	inverseJoinColumns ={ @JoinColumn(name="idAuteur")} )
@@ -109,6 +108,13 @@ public class Article {
 	}
 	public void setListEvaluation(List<Evaluation> listEvaluation) {
 		this.listEvaluation = listEvaluation;
+	}
+
+	@Override
+	public String toString() {
+		return "Article [idArticle=" + idArticle + ", titre=" + titre + ", affiliations=" + affiliations + ", resume="
+				+ resume + ", motCle=" + motCle + ", contenu=" + contenu + ", etat=" + etat + ", auteurs=" + auteurs
+				+ ", listEvaluation=" + listEvaluation + "]";
 	}
 	
 	

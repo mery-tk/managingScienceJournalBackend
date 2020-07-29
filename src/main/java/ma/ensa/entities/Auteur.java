@@ -45,12 +45,21 @@ public class Auteur extends Utilisateur{
 		this.nbrArticlesEcrites = nbrArticlesEcrites;
 	}
 
-	public boolean isCorresponsance() {
+
+	public boolean isCorrespondance() {
 		return correspondance;
 	}
 
-	public void setCorresponsance(boolean correspondance) {
+	public void setCorrespondance(boolean correspondance) {
 		this.correspondance = correspondance;
+	}
+
+	public List<Article> getArticles() {
+		return articles;
+	}
+
+	public void setArticles(List<Article> articles) {
+		this.articles = articles;
 	}
 	
 	

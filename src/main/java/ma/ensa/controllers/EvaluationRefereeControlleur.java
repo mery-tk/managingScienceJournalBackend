@@ -2,6 +2,7 @@ package ma.ensa.controllers;
 
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -13,6 +14,7 @@ import ma.ensa.entities.EvaluationReferee;
 import ma.ensa.services.IEvaluationRefereeService;
 
 @RestController
+@CrossOrigin(origins = "http://localhost:4200")
 public class EvaluationRefereeControlleur {
 	
 	@Autowired private IEvaluationRefereeService evaluationRefereeService;

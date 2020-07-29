@@ -1,8 +1,10 @@
 package ma.ensa.entities;
 
+import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.OneToOne;
+import javax.persistence.ManyToMany;
 import javax.persistence.PrimaryKeyJoinColumn;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -13,9 +15,9 @@ public class Referee extends Utilisateur{
 
 	private int nbrArticlesEvaluees;
 	
-	@OneToOne(mappedBy = "referee", fetch = FetchType.LAZY)
+	@ManyToMany(mappedBy = "referees", fetch = FetchType.LAZY)
 	@JsonIgnore
-	private EvaluationReferee evaluation;
+	private List<EvaluationReferee> evaluationReferees;
 
 	public Referee() {
 		super();
@@ -39,6 +41,16 @@ public class Referee extends Utilisateur{
 	public void setNbrArticlesEvaluees(int nbrArticlesEvaluees) {
 		this.nbrArticlesEvaluees = nbrArticlesEvaluees;
 	}
+
+	public List<EvaluationReferee> getEvaluationReferees() {
+		return evaluationReferees;
+	}
+
+	public void setEvaluationReferees(List<EvaluationReferee> evaluationReferees) {
+		this.evaluationReferees = evaluationReferees;
+	}
+
+	
 	
 	
 	

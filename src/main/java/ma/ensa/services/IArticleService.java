@@ -13,6 +13,5 @@ public interface IArticleService {
 	public Article ajouterArticle(Article article);
 	public Article modifierArticle(Long idArticle, Article article);
 	public boolean supprimerArticle(Long idArticle);
-	public InfoReduitesArticle afficheInfoReduitesArticle(Long id);
 
 }

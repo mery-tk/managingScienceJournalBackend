@@ -15,7 +15,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 public class Auteur extends Utilisateur{
 	
 	private int nbrArticlesEcrites;
-	private boolean correspondance;
+//	private boolean correspondance;
 	
 	
 //	@ManyToMany(mappedBy = "auteurs", fetch = FetchType.LAZY)
@@ -23,8 +23,8 @@ public class Auteur extends Utilisateur{
 //	private List<Article> articles = new ArrayList<Article>();
 	
 	
-	@OneToMany(mappedBy ="correspondance_PK.auteurs")
-	private List<Article> articles=new ArrayList<Article>();
+	@OneToMany(mappedBy ="correspondance_PK.auteur")
+	private List<Correspondance> corres=new ArrayList<Correspondance>();
 	
 	public Auteur() {
 		super();
@@ -39,7 +39,7 @@ public class Auteur extends Utilisateur{
 			String password, int nbrArticlesEcrites, boolean correspondance) {
 		super(nom, prenom, email, telephone, adresse, username, password);
 		this.nbrArticlesEcrites = nbrArticlesEcrites;
-		this.correspondance = correspondance;
+		//this.correspondance = correspondance;
 	}
 
 	public int getNbrArticlesEcrites() {
@@ -51,21 +51,14 @@ public class Auteur extends Utilisateur{
 	}
 
 
-	public boolean isCorrespondance() {
-		return correspondance;
-	}
+//	public boolean isCorrespondance() {
+//		return correspondance;
+//	}
+//
+//	public void setCorrespondance(boolean correspondance) {
+//		this.correspondance = correspondance;
+//	}
 
-	public void setCorrespondance(boolean correspondance) {
-		this.correspondance = correspondance;
-	}
-
-	public List<Article> getArticles() {
-		return articles;
-	}
-
-	public void setArticles(List<Article> articles) {
-		this.articles = articles;
-	}
 	
 	
 	

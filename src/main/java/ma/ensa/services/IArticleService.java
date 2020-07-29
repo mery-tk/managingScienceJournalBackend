@@ -3,7 +3,6 @@ package ma.ensa.services;
 import java.util.List;
 import org.springframework.stereotype.Service;
 import ma.ensa.entities.Article;
-import ma.ensa.entities.InfoReduitesArticle;
 
 @Service
 public interface IArticleService {

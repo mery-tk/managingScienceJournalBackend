@@ -42,8 +42,8 @@ public class Article {
 	private  List<Evaluation> listEvaluation;
 	
 	
-	@OneToMany(mappedBy = "correspondance_PK.articles")
-	private List<Auteur> auteurs=new ArrayList<Auteur>();
+	@OneToMany(mappedBy = "correspondance_PK.article")
+	private List<Correspondance> corres=new ArrayList<Correspondance>();
 	
 	
 	/////////////////////////////
@@ -103,12 +103,7 @@ public class Article {
 	public Article() {
 		super();
 	}
-	public List<Auteur> getAuteurs() {
-		return auteurs;
-	}
-	public void setAuteurs(List<Auteur> auteurs) {
-		this.auteurs = auteurs;
-	}
+	
 	public List<Evaluation> getListEvaluation() {
 		return listEvaluation;
 	}
@@ -116,12 +111,12 @@ public class Article {
 		this.listEvaluation = listEvaluation;
 	}
 
-	@Override
-	public String toString() {
-		return "Article [idArticle=" + idArticle + ", titre=" + titre + ", affiliations=" + affiliations + ", resume="
-				+ resume + ", motCle=" + motCle + ", contenu=" + contenu + ", etat=" + etat + ", auteurs=" + auteurs
-				+ ", listEvaluation=" + listEvaluation + "]";
-	}
+//	@Override
+//	public String toString() {
+//		return "Article [idArticle=" + idArticle + ", titre=" + titre + ", affiliations=" + affiliations + ", resume="
+//				+ resume + ", motCle=" + motCle + ", contenu=" + contenu + ", etat=" + etat + ", auteurs=" + auteurs
+//				+ ", listEvaluation=" + listEvaluation + "]";
+//	}
 	
 	
 	

@@ -38,11 +38,11 @@ public class AuteurService implements IAuteurService{
 		aut.setPrenom(auteur.getPrenom());
 		aut.setTelephone(auteur.getTelephone());
 		aut.setUsername(auteur.getUsername());
-		aut.setCorrespondance(auteur.isCorrespondance());
+		//aut.setCorrespondance(auteur.isCorrespondance());
 		aut.setNbrArticlesEcrites(auteur.getNbrArticlesEcrites());
-		List<Article> articles = aut.getArticles();
-		articles.addAll(auteur.getArticles());
-		aut.setArticles(articles);
+		//List<Article> articles = aut.getArticles();
+	//	articles.addAll(auteur.getArticles());
+		//aut.setArticles(articles);
 		return auteurDao.save(aut);
 	}
 

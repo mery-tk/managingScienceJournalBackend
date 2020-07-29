@@ -3,6 +3,7 @@ package ma.ensa.controllers;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -20,6 +21,7 @@ import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import ma.ensa.entities.Article;
 import ma.ensa.entities.Auteur;
+import ma.ensa.entities.Correspondance;
 import ma.ensa.services.IArticleService;
 import ma.ensa.services.IAuteurService;
 
@@ -62,7 +64,13 @@ public class ArticleControlleur {
 	 
 	 @GetMapping(value = "articles/{idArticle}/auteurs")
 	 public List<Auteur> getAuteursPourArticle(@PathVariable Long idArticle) {
-		 return articleService.afficherArticleParId(idArticle).getAuteurs();
+		 Article article = articleService.afficherArticleParId(idArticle);
+		 List<Correspondance> correspondances = article.getCorres();
+		 List<Auteur> auteurs = new ArrayList<Auteur>();
+		 for (Correspondance correspondance : correspondances) {
+			auteurs.add(correspondance.getCorrespondance_PK().getAuteur());
+		}
+		 return auteurs;
 	 }
 	 
 	 

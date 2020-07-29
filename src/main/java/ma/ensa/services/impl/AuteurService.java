@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 import ma.ensa.dao.IAuteurDao;
 import ma.ensa.entities.Article;
 import ma.ensa.entities.Auteur;
+import ma.ensa.entities.Correspondance;
 import ma.ensa.services.IAuteurService;
 
 @Service
@@ -38,11 +39,7 @@ public class AuteurService implements IAuteurService{
 		aut.setPrenom(auteur.getPrenom());
 		aut.setTelephone(auteur.getTelephone());
 		aut.setUsername(auteur.getUsername());
-		//aut.setCorrespondance(auteur.isCorrespondance());
 		aut.setNbrArticlesEcrites(auteur.getNbrArticlesEcrites());
-		//List<Article> articles = aut.getArticles();
-	//	articles.addAll(auteur.getArticles());
-		//aut.setArticles(articles);
 		return auteurDao.save(aut);
 	}
 

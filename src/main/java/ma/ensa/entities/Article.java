@@ -110,6 +110,12 @@ public class Article {
 	public void setListEvaluation(List<Evaluation> listEvaluation) {
 		this.listEvaluation = listEvaluation;
 	}
+	public List<Correspondance> getCorres() {
+		return corres;
+	}
+	public void setCorres(List<Correspondance> corres) {
+		this.corres = corres;
+	}
 
 //	@Override
 //	public String toString() {

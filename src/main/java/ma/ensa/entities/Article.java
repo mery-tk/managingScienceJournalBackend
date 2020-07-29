@@ -98,6 +98,18 @@ public class Article {
 	public Article() {
 		super();
 	}
+	public List<Auteur> getAuteurs() {
+		return auteurs;
+	}
+	public void setAuteurs(List<Auteur> auteurs) {
+		this.auteurs = auteurs;
+	}
+	public List<Evaluation> getListEvaluation() {
+		return listEvaluation;
+	}
+	public void setListEvaluation(List<Evaluation> listEvaluation) {
+		this.listEvaluation = listEvaluation;
+	}
 	
 	
 	

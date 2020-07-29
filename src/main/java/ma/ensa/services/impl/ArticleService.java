@@ -1,10 +1,14 @@
 package ma.ensa.services.impl;
 
 import java.util.List;
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 import ma.ensa.dao.IArticleDao;
 import ma.ensa.entities.Article;
+import ma.ensa.entities.InfoReduitesArticle;
 import ma.ensa.services.IArticleService;
 
 
@@ -49,6 +53,15 @@ public class ArticleService implements IArticleService{
 		}
 		return false;}
 
+
+	@Override
+	public InfoReduitesArticle afficheInfoReduitesArticle(Long id) {
+		Optional<Article> article=articleDao.findById(id);	
+		InfoReduitesArticle infoReduitesArticle=new InfoReduitesArticle();
+		Article art=article.get();
+		infoReduitesArticle.setListAuteur(art.getAuteurs());
+	      return infoReduitesArticle;
+	}
 		
 	
 }

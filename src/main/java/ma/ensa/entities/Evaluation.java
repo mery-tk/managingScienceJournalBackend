@@ -55,6 +55,12 @@ public class Evaluation {
 	public Evaluation() {
 		super();
 	}
+	public Article getArticle() {
+		return article;
+	}
+	public void setArticle(Article article) {
+		this.article = article;
+	}
 	
 	
 	

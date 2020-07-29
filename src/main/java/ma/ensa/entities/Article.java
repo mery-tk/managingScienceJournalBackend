@@ -43,6 +43,7 @@ public class Article {
 	
 	
 	@OneToMany(mappedBy = "correspondance_PK.article")
+	@JsonIgnore
 	private List<Correspondance> corres=new ArrayList<Correspondance>();
 	
 	

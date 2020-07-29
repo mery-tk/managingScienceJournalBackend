@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.PrimaryKeyJoinColumn;
@@ -12,6 +14,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @PrimaryKeyJoinColumn(name = "idAuteur")
+@Inheritance(strategy = InheritanceType.JOINED)
 public class Auteur extends Utilisateur{
 	
 	private int nbrArticlesEcrites;
@@ -23,6 +26,7 @@ public class Auteur extends Utilisateur{
 	
 	
 	@OneToMany(mappedBy ="correspondance_PK.auteur")
+	@JsonIgnore
 	private List<Correspondance> corres=new ArrayList<Correspondance>();
 	
 	public Auteur() {

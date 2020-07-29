@@ -20,10 +20,12 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import ma.ensa.entities.Article;
+import ma.ensa.entities.ArticleForm;
 import ma.ensa.entities.Auteur;
 import ma.ensa.entities.Correspondance;
 import ma.ensa.services.IArticleService;
 import ma.ensa.services.IAuteurService;
+import ma.ensa.services.ICorrespondanceService;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:4200")
@@ -34,7 +36,10 @@ public class ArticleControlleur {
 	/////////////////////////////////////////
 	
 	@Autowired private IArticleService articleService;
-	@Autowired private IAuteurService auteurService;
+	@Autowired private ICorrespondanceService corresService; 
+	
+	
+	
 	 @GetMapping(value = "/articles")
 	 public List<Article> getArticles(){
 		 return articleService.afficherArticles();
@@ -83,28 +88,25 @@ public class ArticleControlleur {
 	
 	 @PostMapping(value ="/articles")
 	 public Article ajouterArticle(@RequestParam("file") MultipartFile file, @RequestParam("article")String article) throws JsonMappingException, JsonProcessingException, IOException {
-			Article monArticle = new ObjectMapper().readValue(article, Article.class);
+			ArticleForm monArticle = new ObjectMapper().readValue(article, ArticleForm.class);
 			System.out.println("article : "+article);
 			System.out.println(monArticle);
 			Article art = new Article();
-			List<Auteur> auteurs = monArticle.getAuteurs();
+			List<Auteur> auteurs = monArticle.getCo_auters();
+			Auteur auteur = monArticle.getAuteurCorrespondant();
 			art.setTitre(monArticle.getTitre());
 			art.setAffiliations(monArticle.getAffiliations());
 			art.setContenu(file.getOriginalFilename());
 			art.setEtat(monArticle.getEtat());
 		    art.setMotCle(monArticle.getMotCle());
 		    art.setResume(monArticle.getResume());
-		    art.setAuteurs(auteurs);
-		    if(auteurs!=null) {
-			    for (Auteur auteur : auteurs) {
-			    	List<Article> articles = auteur.getArticles();
-			    	articles.add(art);
-					auteur.setArticles(articles);
-					auteurService.modifierAuteur(auteur.getIdUtilisateur(), auteur);
-				}
-		    }
+		    Article articleAjoutee = articleService.ajouterArticle(art);
+		    corresService.ajouterCorrespondance(new Correspondance(articleAjoutee, auteur, true));
+		    for (Auteur auteur2 : auteurs) {
+		    	corresService.ajouterCorrespondance(new Correspondance(articleAjoutee, auteur2, false));
+			}
 			Files.write(Paths.get(articlesDirectory+file.getOriginalFilename()),file.getBytes());
-			return articleService.ajouterArticle(art);
+			return articleAjoutee;
 	    }
 	 
 	 @PutMapping("/articles/{idArticle}")

@@ -6,7 +6,5 @@ import ma.ensa.entities.Administrateur;
 
 @Transactional
 public interface IAdministrateurDao extends JpaRepository<Administrateur, Long>{
-
-	
 	
 }

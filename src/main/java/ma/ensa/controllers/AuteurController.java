@@ -1,5 +1,6 @@
 package ma.ensa.controllers;
 
+import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import ma.ensa.entities.Article;
 import ma.ensa.entities.Auteur;
+import ma.ensa.entities.Correspondance;
 import ma.ensa.services.IAuteurService;
 
 @RestController
@@ -49,7 +51,12 @@ public class AuteurController {
 	 @GetMapping(value = "/auteurs/{idAuteur}/articles")
 	 public List<Article> getArticleAuteur(@PathVariable Long idAuteur) {
 		 Auteur auteur =  auteurService.afficherAuteurParId(idAuteur);
-		 return auteur.getArticles();
+		 List<Correspondance> correspondances = auteur.getCorres();
+		 List<Article> articles = new ArrayList<Article>();
+		 for (Correspondance correspondance : correspondances) {
+				articles.add(correspondance.getCorrespondance_PK().getArticle());
+			}
+		 return articles;
 	 }
 
 }

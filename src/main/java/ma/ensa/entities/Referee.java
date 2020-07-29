@@ -11,7 +11,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @PrimaryKeyJoinColumn(name = "idReferee")
-public class Referee extends Utilisateur{
+public class Referee extends Auteur{
 
 	private int nbrArticlesEvaluees;
 	

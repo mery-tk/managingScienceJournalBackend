@@ -2,6 +2,9 @@ package ma.ensa.services.impl;
 
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import ma.ensa.dao.IArticleDao;
 import ma.ensa.entities.Article;
@@ -48,6 +51,13 @@ public class ArticleService implements IArticleService{
 		return false;
 	}
 
+	@Override
+	public Page<Article> chercherArticles(String mc, int p, int s) {
+		 return articleDao.chercherArticleParMc("%"+mc+"%", (org.springframework.data.domain.Pageable) PageRequest.of(p, s));
+	
+	}
 
+	
+	
 		
 }

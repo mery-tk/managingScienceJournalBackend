@@ -10,7 +10,7 @@ public class Correspondance {
 
 	@Id
 	private Correspondance_PK correspondance_PK;
-	private boolean correspondance;
+	private boolean correspondance = false;
 	
 	
 	
@@ -38,6 +38,10 @@ public class Correspondance {
 	}
 	public Correspondance() {
 		super();
+	}
+	@Override
+	public String toString() {
+		return "Correspondance [correspondance_PK=" + correspondance_PK + ", correspondance=" + correspondance + "]";
 	}
 	
 	

@@ -18,6 +18,10 @@ public class Referee extends Auteur{
 	@ManyToMany(mappedBy = "referees", fetch = FetchType.LAZY)
 	@JsonIgnore
 	private List<EvaluationReferee> evaluationReferees;
+	
+	@ManyToMany(mappedBy = "referees",fetch = FetchType.LAZY)
+	@JsonIgnore
+	private List<Article> articles;
 
 	public Referee() {
 		super();
@@ -48,6 +52,14 @@ public class Referee extends Auteur{
 
 	public void setEvaluationReferees(List<EvaluationReferee> evaluationReferees) {
 		this.evaluationReferees = evaluationReferees;
+	}
+
+	public List<Article> getArticles() {
+		return articles;
+	}
+
+	public void setArticles(List<Article> articles) {
+		this.articles = articles;
 	}
 
 	

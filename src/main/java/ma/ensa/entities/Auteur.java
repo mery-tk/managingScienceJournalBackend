@@ -17,7 +17,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 @Inheritance(strategy = InheritanceType.JOINED)
 public class Auteur extends Utilisateur{
 	
-	private int nbrArticlesEcrites;
+	private int nbrArticlesEcrites=0;
 	
 	
 //	@ManyToMany(mappedBy = "auteurs", fetch = FetchType.LAZY)

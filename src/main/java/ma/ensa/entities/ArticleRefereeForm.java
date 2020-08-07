@@ -1,8 +1,7 @@
 package ma.ensa.entities;
 
-import java.util.List;
 
-public class ArticleForm {
+public class ArticleRefereeForm {
 	
 	private String titre;
 	private String affiliations;
@@ -10,9 +9,8 @@ public class ArticleForm {
 	private String motCle;
 	private String contenu;
 	private String etat;
-	private Auteur auteurCorrespondant;
-	private List<Auteur> co_auters;
-	//private List<Referee> referees;
+	private Long idReferee;
+	
 	public String getTitre() {
 		return titre;
 	}
@@ -49,27 +47,14 @@ public class ArticleForm {
 	public void setEtat(String etat) {
 		this.etat = etat;
 	}
-	public Auteur getAuteurCorrespondant() {
-		return auteurCorrespondant;
+	public Long getIdReferee() {
+		return idReferee;
 	}
-	public void setAuteurCorrespondant(Auteur auteurCorrespondant) {
-		this.auteurCorrespondant = auteurCorrespondant;
+	public void setIdReferee(Long idReferee) {
+		this.idReferee = idReferee;
 	}
-	public List<Auteur> getCo_auters() {
-		return co_auters;
-	}
-	public void setCo_auters(List<Auteur> co_auters) {
-		this.co_auters = co_auters;
-	}
-	public ArticleForm() {
-		super();
-	}
-//	public List<Referee> getReferees() {
-//		return referees;
-//	}
-//	public void setReferees(List<Referee> referees) {
-//		this.referees = referees;
-//	}
+	
+	
 	
 	
 

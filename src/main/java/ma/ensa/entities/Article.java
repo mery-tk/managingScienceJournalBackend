@@ -46,6 +46,13 @@ public class Article {
 	@JsonIgnore
 	private List<Correspondance> corres=new ArrayList<Correspondance>();
 	
+	@ManyToMany
+	@LazyCollection(LazyCollectionOption.FALSE)
+	@JoinTable(name = "article_referee",
+	joinColumns = { @JoinColumn(name="idArticle")},
+	inverseJoinColumns ={ @JoinColumn(name="idReferee")} )
+	 private List<Referee> referees;
+	
 	
 	/////////////////////////////
 	public Long getIdArticle() {
@@ -116,6 +123,12 @@ public class Article {
 	}
 	public void setCorres(List<Correspondance> corres) {
 		this.corres = corres;
+	}
+	public List<Referee> getReferees() {
+		return referees;
+	}
+	public void setReferees(List<Referee> referees) {
+		this.referees = referees;
 	}
 
 //	@Override

@@ -142,7 +142,7 @@ public class ArticleControlleur {
 	 
 
 
-	 @RequestMapping(value = "/chercherArticlesParAuteur",method=RequestMethod.GET)
+	 @GetMapping(value = "/chercherArticlesParAuteur")
 		public List<Article> chercherArticleParAuteur(@RequestParam(name="aut",defaultValue = "")String aut)
 	 { 
 		 List<Auteur> auteurs = auteurService.afficherAuteurs();

@@ -38,6 +38,14 @@ public EvaluationComite(String qualificationComite) {
 public EvaluationComite() {
 	super();
 }
+
+public ComiteEditoriale getComite() {
+	return comite;
+}
+
+public void setComite(ComiteEditoriale comite) {
+	this.comite = comite;
+}
    
 
 }

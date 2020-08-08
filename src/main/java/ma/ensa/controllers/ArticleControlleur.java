@@ -28,10 +28,14 @@ import ma.ensa.entities.ArticleForm;
 import ma.ensa.entities.ArticleRefereeForm;
 import ma.ensa.entities.Auteur;
 import ma.ensa.entities.Correspondance;
+import ma.ensa.entities.Evaluation;
+import ma.ensa.entities.EvaluationComite;
 import ma.ensa.entities.Referee;
 import ma.ensa.services.IArticleService;
 import ma.ensa.services.IAuteurService;
+import ma.ensa.services.IComiteEditorialeService;
 import ma.ensa.services.ICorrespondanceService;
+import ma.ensa.services.IEvaluationComiteService;
 import ma.ensa.services.IRefereeService;
 
 @RestController
@@ -46,6 +50,8 @@ public class ArticleControlleur {
 	@Autowired private ICorrespondanceService corresService; 
 	@Autowired private IAuteurService auteurService;
 	@Autowired private IRefereeService refereeService; 
+	@Autowired private IEvaluationComiteService evaluationComiteService;
+	@Autowired private IComiteEditorialeService comiteEditorialeService;
 	
 	
 	
@@ -205,6 +211,20 @@ public class ArticleControlleur {
 		 }
 		 
 		 return listt;
+	 }
+	 
+	 @PutMapping(value = "/articles/{idArticle}/evaluationComite")
+	 public Article evaluerParComite(@PathVariable Long idArticle, @RequestBody String qualification) {
+		 Article article = articleService.afficherArticleParId(idArticle);
+		 EvaluationComite evaluationComite = new EvaluationComite(qualification);
+		 evaluationComite.setArticle(article);
+		 evaluationComite.setComite(comiteEditorialeService.afficherComiteEditorialeParId(Long.valueOf("1")));
+		 EvaluationComite comite = evaluationComiteService.ajouterEvaluationComite(evaluationComite);
+		 List<Evaluation> evaluations = article.getListEvaluation();
+		 evaluations.add(comite);
+		 article.setListEvaluation(evaluations);
+		 article.setEtat(qualification);
+		 return articleService.modifierArticle(idArticle, article);
 	 }
 	 
 

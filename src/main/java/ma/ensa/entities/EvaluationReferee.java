@@ -16,6 +16,8 @@ import org.hibernate.annotations.LazyCollectionOption;
 public class EvaluationReferee extends Evaluation {
 
 	private String qualificationReferee;
+	public String commentaire;
+	public String rapport;
 
 	
 	
@@ -50,6 +52,22 @@ public class EvaluationReferee extends Evaluation {
 
 	public void setReferees(List<Referee> referees) {
 		this.referees = referees;
+	}
+
+	public String getCommentaire() {
+		return commentaire;
+	}
+
+	public void setCommentaire(String commentaire) {
+		this.commentaire = commentaire;
+	}
+
+	public String getRapport() {
+		return rapport;
+	}
+
+	public void setRapport(String rapport) {
+		this.rapport = rapport;
 	}
 	
 	

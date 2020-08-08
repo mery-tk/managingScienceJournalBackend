@@ -184,22 +184,25 @@ public class ArticleControlleur {
 	
 	 @GetMapping(value = "/auteursNonReferee/{idArticle}")
 	 public List<Auteur> trouverRefereePourArticle(@PathVariable Long idArticle){
-		 Article article=articleService.afficherArticleParId(idArticle);
-		 List<Correspondance> correspondances = article.getCorres();
-		 List<Auteur> listeAuteurs=new ArrayList<Auteur>();
-		 List<Auteur> listeAuteurs2=new ArrayList<Auteur>();
-		 List<Auteur> list=auteurService.afficherAuteurs();
+		 Article article=articleService.afficherArticleParId(idArticle);//OK
+		 List<Correspondance> correspondances = article.getCorres();//OK
+		 List<Auteur> listeAuteurs=new ArrayList<Auteur>();//OK
+		 List<Auteur> list=auteurService.afficherAuteurs();//OK
+		 List<Auteur> listt=auteurService.afficherAuteurs();
 		 for(Correspondance corr:correspondances) {
-			 listeAuteurs.add(corr.getCorrespondance_PK().getAuteur());	 	 
+			 listeAuteurs.add(corr.getCorrespondance_PK().getAuteur());	 //OK	 
+			 
 		 }
 		 for(Auteur a:list) {
 			 for(Auteur aut:listeAuteurs)
-			 { if(a!=aut) {
-					 listeAuteurs2.add(a);  } 
+			 { if(a.getIdUtilisateur()==aut.getIdUtilisateur()) {
+				 listt.remove(a);
+					 System.out.println(a.getIdUtilisateur());} 
+			 
 			 }	 
 		 }
 		 
-		 return listeAuteurs2;
+		 return listt;
 	 }
 	 
 

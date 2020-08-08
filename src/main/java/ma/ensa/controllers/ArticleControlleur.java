@@ -167,17 +167,19 @@ public class ArticleControlleur {
 	 
 	 
 	 @RequestMapping(value = "/ajouterRefereeArticle/{id}",method=RequestMethod.PUT)
-		public Article  affecterRefereeArticle(@PathVariable Long id, @RequestBody ArticleRefereeForm articleRefereeForm) { 
+		public Article  affecterRefereeArticle(@PathVariable Long id, @RequestBody List<Referee> referees) { 
 			Article art=articleService.afficherArticleParId(id);
-			Referee referee=refereeService.afficherRefereeParId(articleRefereeForm.getIdReferee());
-			List<Article> lista=referee.getArticles();
+			for (Referee referee2 : referees) {
+				List<Article> articles = referee2.getArticles();
+				articles.add(art);
+				referee2.setArticles(articles);
+				refereeService.modifierReferee(referee2.getIdUtilisateur(), referee2);
+			}
 			List<Referee> listReferee=art.getReferees();
-			listReferee.add(referee);
+			listReferee.addAll(referees);
 			art.setReferees(listReferee);		
 			Article a=articleService.modifierArticle(id, art);
-			lista.add(a);
-			referee.setArticles(lista);
-			refereeService.modifierReferee(articleRefereeForm.getIdReferee(), referee);
+			
 			return a;
 		}
 	 

@@ -1,5 +1,6 @@
 package ma.ensa.entities;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Entity;
@@ -17,11 +18,11 @@ public class Referee extends Auteur{
 	
 	@ManyToMany(mappedBy = "referees", fetch = FetchType.LAZY)
 	@JsonIgnore
-	private List<EvaluationReferee> evaluationReferees;
+	private List<EvaluationReferee> evaluationReferees = new ArrayList<EvaluationReferee>();
 	
 	@ManyToMany(mappedBy = "referees",fetch = FetchType.LAZY)
 	@JsonIgnore
-	private List<Article> articles;
+	private List<Article> articles = new ArrayList<Article>();
 
 	public Referee() {
 		super();

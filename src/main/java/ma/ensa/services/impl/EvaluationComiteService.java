@@ -32,9 +32,7 @@ public class EvaluationComiteService implements IEvaluationComiteService {
 	@Override
 	public EvaluationComite modifierEvaluationComite(Long idEvaluationComite, EvaluationComite evaluationComite) {
 		EvaluationComite evaluationComit=this.afficherEvaluationComiteParId(idEvaluationComite);
-		evaluationComit.setCommentaire(evaluationComite.getCommentaire());
 		evaluationComit.setQualificationComite(evaluationComite.getQualificationComite());
-		evaluationComit.setRapport(evaluationComite.getRapport());
 		
 		return evaluationComit;
 	}

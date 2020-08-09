@@ -40,6 +40,6 @@ public class GestionRevueApplication implements CommandLineRunner{
 //		articleService.ajouterArticle(new Article(Long.valueOf("3"), "titre3", "aff3", "res3", "motCle3", "contenu3", "recent"));
 //		refereeService.ajouterReferee(new Referee("nom1", "prenom1", "email1@mail.com", Long.valueOf("0600000001"), "adresse1", "username1", "password1"));
 //		refereeService.ajouterReferee(new Referee("nom2", "prenom2", "email2@mail.com", Long.valueOf("0600000001"), "adresse2", "username2", "password2"));
-		
+//		
 	}
 }

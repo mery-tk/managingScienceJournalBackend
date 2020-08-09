@@ -30,13 +30,16 @@ import ma.ensa.entities.Auteur;
 import ma.ensa.entities.Correspondance;
 import ma.ensa.entities.Evaluation;
 import ma.ensa.entities.EvaluationComite;
+import ma.ensa.entities.EvaluationReferee;
 import ma.ensa.entities.Referee;
 import ma.ensa.services.IArticleService;
 import ma.ensa.services.IAuteurService;
 import ma.ensa.services.IComiteEditorialeService;
 import ma.ensa.services.ICorrespondanceService;
 import ma.ensa.services.IEvaluationComiteService;
+import ma.ensa.services.IEvaluationService;
 import ma.ensa.services.IRefereeService;
+import ma.ensa.services.impl.EvaluationService;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:4200")
@@ -53,7 +56,7 @@ public class ArticleControlleur {
 	@Autowired private IEvaluationComiteService evaluationComiteService;
 	@Autowired private IComiteEditorialeService comiteEditorialeService;
 	
-	
+	@Autowired private IEvaluationService evaluationService;
 	
 	 @GetMapping(value = "/articles")
 	 public List<Article> getArticles(){
@@ -226,6 +229,38 @@ public class ArticleControlleur {
 		 article.setEtat(qualification);
 		 return articleService.modifierArticle(idArticle, article);
 	 }
+	 
+	 @PutMapping(value = "/articles/{idArticle}/evaluationReferee")
+	 public Article evaluerParReferee(@PathVariable Long idArticle, @RequestBody EvaluationReferee evaluationReferee) {
+		 Article article = articleService.afficherArticleParId(idArticle);
+		 Referee referee=refereeService.afficherRefereeParId(1L);
+		 Evaluation evaluation=evaluationService.afficherEvaluationParId(evaluationReferee.getIdEvaluation());
+		 
+		 //Article et evaluation
+		 List<Evaluation> evaluations=article.getListEvaluation();
+		 evaluations.add(evaluation);
+		 article.setListEvaluation(evaluations);
+		 Article ar=articleService.modifierArticle(idArticle, article);
+		 evaluation.setArticle(ar);
+		 evaluationService.modifierEvaluation(evaluationReferee.getIdEvaluation(), evaluation);
+		 
+		 //entre referee et evaluationReferee
+		 List<Referee> listeReferee=evaluationReferee.getReferees();
+		 List<EvaluationReferee> listeEvaluationReferees=referee.getEvaluationReferees();
+		 
+		 listeEvaluationReferees.add(evaluationReferee);
+		 referee.setEvaluationReferees(listeEvaluationReferees);
+		 Referee ref=refereeService.modifierReferee(1L, referee);
+		 listeReferee.add(ref);
+		 evaluationReferee.setReferees(listeReferee);
+		 
+		 
+		 
+		 
+		 return ar;
+	 }
+	
+	 
 	 
 
 	 

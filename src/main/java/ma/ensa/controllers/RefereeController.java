@@ -53,11 +53,7 @@ public class RefereeController {
 	@GetMapping(value = "/referees/{idReferee}/articles")
 	public List<Article> getArticlesAEvaluer(@PathVariable Long idReferee){
 		Referee referee = refereeService.afficherRefereeParId(idReferee);
-		List<EvaluationReferee> evaluations = referee.getEvaluationReferees();
-		List<Article> articles = new ArrayList<Article>();
-		for (EvaluationReferee evaluationReferee : evaluations) {
-			articles.add(evaluationReferee.getArticle());
-		}
+		List<Article> articles = referee.getArticles();
 		return articles;
 	}
 	

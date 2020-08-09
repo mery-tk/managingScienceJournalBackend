@@ -31,7 +31,6 @@ public class EvaluationService implements IEvaluationService{
 	@Override
 	public Evaluation modifierEvaluation(Long id, Evaluation evaluation) {
 		Evaluation eval = this.afficherEvaluationParId(id);
-		
 		return evaluationDao.save(eval);
 	}
 

@@ -33,7 +33,7 @@ public class EvaluationComiteService implements IEvaluationComiteService {
 	public EvaluationComite modifierEvaluationComite(Long idEvaluationComite, EvaluationComite evaluationComite) {
 		EvaluationComite evaluationComit=this.afficherEvaluationComiteParId(idEvaluationComite);
 		evaluationComit.setQualificationComite(evaluationComite.getQualificationComite());
-		
+		evaluationComit.setQualificationComite(evaluationComite.getQualificationComite());		
 		return evaluationComit;
 	}
 

@@ -69,6 +69,12 @@ public class EvaluationReferee extends Evaluation {
 	public void setRapport(String rapport) {
 		this.rapport = rapport;
 	}
+
+	@Override
+	public String toString() {
+		return "EvaluationReferee [qualificationReferee=" + qualificationReferee + ", commentaire=" + commentaire
+				+ ", rapport=" + rapport + ", referees=" + referees + "]";
+	}
 	
 	
 	

@@ -23,6 +23,8 @@ import org.springframework.web.multipart.MultipartFile;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+
+import ma.ensa.dao.IEvaluationDao;
 import ma.ensa.entities.Article;
 import ma.ensa.entities.ArticleForm;
 import ma.ensa.entities.ArticleRefereeForm;
@@ -37,8 +39,10 @@ import ma.ensa.services.IAuteurService;
 import ma.ensa.services.IComiteEditorialeService;
 import ma.ensa.services.ICorrespondanceService;
 import ma.ensa.services.IEvaluationComiteService;
+import ma.ensa.services.IEvaluationRefereeService;
 import ma.ensa.services.IEvaluationService;
 import ma.ensa.services.IRefereeService;
+import ma.ensa.services.impl.EvaluationRefereeService;
 import ma.ensa.services.impl.EvaluationService;
 
 @RestController
@@ -55,7 +59,8 @@ public class ArticleControlleur {
 	@Autowired private IRefereeService refereeService; 
 	@Autowired private IEvaluationComiteService evaluationComiteService;
 	@Autowired private IComiteEditorialeService comiteEditorialeService;
-	
+	@Autowired private IEvaluationRefereeService evaluationRefereeService;
+	@Autowired private IEvaluationDao evaluationDao;
 	@Autowired private IEvaluationService evaluationService;
 	
 	 @GetMapping(value = "/articles")
@@ -231,33 +236,38 @@ public class ArticleControlleur {
 	 }
 	 
 	 @PutMapping(value = "/articles/{idArticle}/evaluationReferee")
-	 public Article evaluerParReferee(@PathVariable Long idArticle, @RequestBody EvaluationReferee evaluationReferee) {
+	 public void evaluerParReferee(@PathVariable Long idArticle, @RequestBody EvaluationReferee evaluationRefere) {
 		 Article article = articleService.afficherArticleParId(idArticle);
-		 Referee referee=refereeService.afficherRefereeParId(1L);
-		 Evaluation evaluation=evaluationService.afficherEvaluationParId(evaluationReferee.getIdEvaluation());
-		 
+		 Referee referee=refereeService.afficherRefereeParId(6L);
+		Evaluation evaluation=evaluationDao.findAll().get(evaluationDao.findAll().size()-1);
+		System.out.println(evaluation.getIdEvaluation());
+		
 		 //Article et evaluation
 		 List<Evaluation> evaluations=article.getListEvaluation();
 		 evaluations.add(evaluation);
 		 article.setListEvaluation(evaluations);
 		 Article ar=articleService.modifierArticle(idArticle, article);
 		 evaluation.setArticle(ar);
-		 evaluationService.modifierEvaluation(evaluationReferee.getIdEvaluation(), evaluation);
+		 evaluationService.modifierEvaluation(evaluation.getIdEvaluation(), evaluation);
 		 
-		 //entre referee et evaluationReferee
+//		 //entre referee et evaluationReferee
+		 EvaluationReferee evaluationReferee=evaluationRefereeService.afficherEvaluationRefereeParId(evaluation.getIdEvaluation());
+		 System.out.println(evaluationReferee.getIdEvaluation());
+		 System.out.println(referee);
 		 List<Referee> listeReferee=evaluationReferee.getReferees();
 		 List<EvaluationReferee> listeEvaluationReferees=referee.getEvaluationReferees();
 		 
 		 listeEvaluationReferees.add(evaluationReferee);
 		 referee.setEvaluationReferees(listeEvaluationReferees);
-		 Referee ref=refereeService.modifierReferee(1L, referee);
+		 Referee ref=refereeService.modifierReferee(6L, referee);
+         System.out.println(ref);
+         
 		 listeReferee.add(ref);
+		 
 		 evaluationReferee.setReferees(listeReferee);
-		 
-		 
-		 
-		 
-		 return ar;
+		
+		evaluationRefereeService.modifierEvaluationReferee(evaluation.getIdEvaluation(), evaluationReferee);		
+		System.out.println(evaluationReferee.getIdEvaluation());
 	 }
 	
 	 

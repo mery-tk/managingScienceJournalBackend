@@ -63,6 +63,12 @@ public class Referee extends Auteur{
 		this.articles = articles;
 	}
 
+	@Override
+	public String toString() {
+		return "Referee [nbrArticlesEvaluees=" + nbrArticlesEvaluees + ", evaluationReferees=" + evaluationReferees
+				+ ", articles=" + articles + "]";
+	}
+
 	
 	
 	

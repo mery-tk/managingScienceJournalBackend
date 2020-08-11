@@ -1,5 +1,6 @@
 package ma.ensa.entities;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Entity;
@@ -26,7 +27,7 @@ public class EvaluationReferee extends Evaluation {
 	@JoinTable(name = "evaluationReferee_referee",
 	joinColumns = { @JoinColumn(name="idEvaluationReferee")},
 	inverseJoinColumns ={ @JoinColumn(name="idReferee")} )
-	 private List<Referee> referees;
+	 private List<Referee> referees = new ArrayList<Referee>();
 	
 	
 	public String getQualificationReferee() {

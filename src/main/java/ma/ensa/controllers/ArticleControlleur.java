@@ -157,8 +157,7 @@ public class ArticleControlleur {
 
 
 	 @GetMapping(value = "/chercherArticlesParAuteur")
-		public List<Article> chercherArticleParAuteur(@RequestParam(name="aut",defaultValue = "")String aut)
-	 { 
+		public List<Article> chercherArticleParAuteur(@RequestParam(name="aut",defaultValue = "")String aut) { 
 		 List<Auteur> auteurs = auteurService.afficherAuteurs();
 		 List<Auteur> listAut=new ArrayList<Auteur>(); 
 		 List<Article> articlesChoisi=new ArrayList<Article>();
@@ -235,39 +234,15 @@ public class ArticleControlleur {
 		 return articleService.modifierArticle(idArticle, article);
 	 }
 	 
-	 @PutMapping(value = "/articles/{idArticle}/evaluationReferee")
-	 public void evaluerParReferee(@PathVariable Long idArticle, @RequestBody EvaluationReferee evaluationRefere) {
+	 @PostMapping(value = "/articles/{idArticle}/evaluationReferee/{idReferee}")
+	 public EvaluationReferee evaluerParReferee(@PathVariable Long idArticle, @RequestBody EvaluationReferee evaluationRefere, @PathVariable Long idReferee) {
 		 Article article = articleService.afficherArticleParId(idArticle);
-		 Referee referee=refereeService.afficherRefereeParId(6L);
-		Evaluation evaluation=evaluationDao.findAll().get(evaluationDao.findAll().size()-1);
-		System.out.println(evaluation.getIdEvaluation());
-		
-		 //Article et evaluation
-		 List<Evaluation> evaluations=article.getListEvaluation();
-		 evaluations.add(evaluation);
-		 article.setListEvaluation(evaluations);
-		 Article ar=articleService.modifierArticle(idArticle, article);
-		 evaluation.setArticle(ar);
-		 evaluationService.modifierEvaluation(evaluation.getIdEvaluation(), evaluation);
-		 
-//		 //entre referee et evaluationReferee
-		 EvaluationReferee evaluationReferee=evaluationRefereeService.afficherEvaluationRefereeParId(evaluation.getIdEvaluation());
-		 System.out.println(evaluationReferee.getIdEvaluation());
-		 System.out.println(referee);
-		 List<Referee> listeReferee=evaluationReferee.getReferees();
-		 List<EvaluationReferee> listeEvaluationReferees=referee.getEvaluationReferees();
-		 
-		 listeEvaluationReferees.add(evaluationReferee);
-		 referee.setEvaluationReferees(listeEvaluationReferees);
-		 Referee ref=refereeService.modifierReferee(6L, referee);
-         System.out.println(ref);
-         
-		 listeReferee.add(ref);
-		 
-		 evaluationReferee.setReferees(listeReferee);
-		
-		evaluationRefereeService.modifierEvaluationReferee(evaluation.getIdEvaluation(), evaluationReferee);		
-		System.out.println(evaluationReferee.getIdEvaluation());
+		 Referee referee = refereeService.afficherRefereeParId(idReferee);
+		 evaluationRefere.setArticle(article);
+		 List<Referee> referees = evaluationRefere.getReferees();
+		 referees.add(referee);
+		 evaluationRefere.setReferees(referees);
+		 return evaluationRefereeService.ajouterEvaluationReferee(evaluationRefere);
 	 }
 	
 	 

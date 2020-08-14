@@ -13,4 +13,5 @@ public interface IAuteurService {
 	public Auteur modifierAuteur(Long idAuteur, Auteur auteur);
 	public boolean supprimerAuteur(Long idAuteur);
 
+
 }

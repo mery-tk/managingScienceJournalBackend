@@ -5,7 +5,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+
+import ma.ensa.dao.IRoleDao;
 import ma.ensa.dao.IUtilisateurDao;
+import ma.ensa.entities.Role;
 import ma.ensa.entities.Utilisateur;
 import ma.ensa.services.IUtilisateurService;
 
@@ -14,6 +17,7 @@ import ma.ensa.services.IUtilisateurService;
 public class UtilisateurService implements IUtilisateurService{
 
 	@Autowired private IUtilisateurDao utilisateurDao;
+	@Autowired private IRoleDao roleDao;
 	
 	@Override
 	public List<Utilisateur> afficherUtilisateurs() {
@@ -55,6 +59,23 @@ public class UtilisateurService implements IUtilisateurService{
 	@Override
 	public Page<Utilisateur> chercherUtilisateurs(String mc, Pageable pageable) {
 		return utilisateurDao.getPage(mc, pageable);
+	}
+
+	
+
+	@Override
+	public void addRoleToUser(String username, String roleName) {
+		Role role=roleDao.findByNomRole(roleName);
+		Utilisateur utilisateur=utilisateurDao.findByUsername(username);
+		utilisateur.getRoles().add(role);
+		
+		
+	}
+
+	@Override
+	public Utilisateur findUserByUsername(String username) {
+		return utilisateurDao.findByUsername(username);
+		
 	}
 
 }

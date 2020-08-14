@@ -7,5 +7,5 @@ import ma.ensa.entities.Auteur;
 @Transactional
 public interface IAuteurDao extends JpaRepository<Auteur, Long>{
 
-	
+	public Auteur findByUsername(String username);
 }

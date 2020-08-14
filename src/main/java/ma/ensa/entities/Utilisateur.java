@@ -1,5 +1,9 @@
 package ma.ensa.entities;
 
+import java.util.ArrayList;
+import java.util.Collection;
+
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -8,14 +12,20 @@ import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
+
+
 
 
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
 public class Utilisateur {
 
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long idUtilisateur;
@@ -24,6 +34,7 @@ public class Utilisateur {
 	private String email;
 	private Long telephone;
 	private String adresse;
+	@Column(unique = true)
 	private String username;
 	private String password;
 	
@@ -31,6 +42,11 @@ public class Utilisateur {
 	@JoinColumn(name="idComite")
 	@JsonIgnore
 	private ComiteEditoriale comiteEditoriale;
+	
+	@ManyToMany(fetch = FetchType.EAGER)
+	private Collection<Role> roles=new ArrayList<>();
+	
+	
 	
 	
 	public Utilisateur() {
@@ -48,6 +64,7 @@ public class Utilisateur {
 		this.username = username;
 		this.password = password;
 	}
+	
 	
 	public Long getIdUtilisateur() {
 		return idUtilisateur;
@@ -111,6 +128,29 @@ public class Utilisateur {
 	
 	public void setPassword(String password) {
 		this.password = password;
+	}
+
+	public ComiteEditoriale getComiteEditoriale() {
+		return comiteEditoriale;
+	}
+
+	public void setComiteEditoriale(ComiteEditoriale comiteEditoriale) {
+		this.comiteEditoriale = comiteEditoriale;
+	}
+
+	public Collection<Role> getRoles() {
+		return roles;
+	}
+
+	public void setRoles(Collection<Role> roles) {
+		this.roles = roles;
+	}
+
+	@Override
+	public String toString() {
+		return "Utilisateur [idUtilisateur=" + idUtilisateur + ", nom=" + nom + ", prenom=" + prenom + ", email="
+				+ email + ", telephone=" + telephone + ", adresse=" + adresse + ", username=" + username + ", password="
+				+ password + ", roles=" + roles + "]";
 	}
 	
 	

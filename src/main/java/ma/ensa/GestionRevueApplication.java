@@ -11,9 +11,11 @@ import ma.ensa.dao.IArticleDao;
 import ma.ensa.entities.Article;
 import ma.ensa.entities.Auteur;
 import ma.ensa.entities.Referee;
+import ma.ensa.entities.Role;
 import ma.ensa.services.IArticleService;
 import ma.ensa.services.IAuteurService;
 import ma.ensa.services.IRefereeService;
+import ma.ensa.services.IRoleService;
 
 @SpringBootApplication
 public class GestionRevueApplication implements CommandLineRunner{
@@ -21,7 +23,7 @@ public class GestionRevueApplication implements CommandLineRunner{
 	@Autowired IAuteurService auteurService;
 	@Autowired IArticleService articleService;
 	@Autowired IRefereeService refereeService;
-
+@Autowired IRoleService roleService;
 	public static void main(String[] args) {
 		new File(ArticleControlleur.articlesDirectory).mkdir();
 		SpringApplication.run(GestionRevueApplication.class, args);
@@ -41,5 +43,10 @@ public class GestionRevueApplication implements CommandLineRunner{
 //		refereeService.ajouterReferee(new Referee("nom1", "prenom1", "email1@mail.com", Long.valueOf("0600000001"), "adresse1", "username1", "password1"));
 //		refereeService.ajouterReferee(new Referee("nom2", "prenom2", "email2@mail.com", Long.valueOf("0600000001"), "adresse2", "username2", "password2"));
 //		
+	
+	
+//	roleService.ajouterRole(new Role("UTILISATEUR"));
+//	roleService.ajouterRole(new Role("AUTEUR"));
+//	
 	}
 }

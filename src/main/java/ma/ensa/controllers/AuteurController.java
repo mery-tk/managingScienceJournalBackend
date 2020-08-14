@@ -12,17 +12,22 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import ma.ensa.dao.IRoleDao;
 import ma.ensa.entities.Article;
 import ma.ensa.entities.Auteur;
 import ma.ensa.entities.Correspondance;
+import ma.ensa.entities.Role;
+import ma.ensa.entities.Utilisateur;
 import ma.ensa.services.IAuteurService;
+import ma.ensa.services.IUtilisateurService;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:4200")
 public class AuteurController {
 	
 	@Autowired private IAuteurService auteurService;
-	
+	@Autowired private IUtilisateurService utilisateurService;
+	@Autowired private IRoleDao roleDao;
 	@GetMapping(value = "/auteurs")
 	 public List<Auteur> getAuteurs(){
 		 return auteurService.afficherAuteurs();
@@ -32,9 +37,19 @@ public class AuteurController {
 	 public Auteur getAuteurByID(@PathVariable Long idAuteur) {
 		 return auteurService.afficherAuteurParId(idAuteur);
 	 }
-	 
+
 	 @PostMapping(value = "/auteurs")
 	 public Auteur addAuteur(@RequestBody Auteur auteur) {
+		 String username=auteur.getUsername();
+			Utilisateur User=utilisateurService.findUserByUsername(username);
+			if(User!=null) {
+				throw new RuntimeException("Essayez un autre Username");	
+			}
+			Role rol=roleDao.findByNomRole("AUTEUR");
+			auteur.getRoles().add(rol);
+			System.out.println(auteur.getRoles());
+			System.out.println(rol.getId());
+		 
 		 return auteurService.ajouterAuteur(auteur);
 	 }
 	 

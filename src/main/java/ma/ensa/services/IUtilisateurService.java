@@ -16,6 +16,9 @@ public interface IUtilisateurService {
 	public Utilisateur modifierUtilisateur(Long idUtilisateur, Utilisateur utilisateur);
 	public boolean supprimerUtilisateur(Long idUtilisateur);
 	public Page<Utilisateur> chercherUtilisateurs(String mc, Pageable pageable);
+	public void addRoleToUser(String username,String roleName);
+	public Utilisateur findUserByUsername(String username);
 	
+
 
 }

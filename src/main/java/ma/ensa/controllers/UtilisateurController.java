@@ -13,6 +13,9 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
+import ma.ensa.dao.IRoleDao;
+import ma.ensa.entities.Role;
 import ma.ensa.entities.Utilisateur;
 import ma.ensa.services.IUtilisateurService;
 
@@ -21,6 +24,7 @@ import ma.ensa.services.IUtilisateurService;
 public class UtilisateurController {
 
 	@Autowired IUtilisateurService utilisateurService;
+	@Autowired IRoleDao roleDao;
 	
 	@GetMapping(value = "/utilisateurs")
 	public List<Utilisateur> getUsers(){
@@ -34,6 +38,18 @@ public class UtilisateurController {
 	
 	@PostMapping(value = "/utilisateurs")
 	public Utilisateur addUser(@RequestBody Utilisateur utilisateur) {
+		
+		String usernom=utilisateur.getUsername();
+		Utilisateur User=utilisateurService.findUserByUsername(usernom);
+		if(User!=null) {
+			throw new RuntimeException("Essayez un autre Username");	
+		}
+	
+		
+		Role rol=roleDao.findByNomRole("UTILISATEUR");
+		utilisateur.getRoles().add(rol);
+System.out.println(utilisateur.getRoles());
+		System.out.println(rol.getId());
 		return utilisateurService.ajouterUtilisateur(utilisateur);
 	}
 	

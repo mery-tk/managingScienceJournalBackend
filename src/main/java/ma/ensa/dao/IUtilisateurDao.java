@@ -1,5 +1,7 @@
 package ma.ensa.dao;
 
+import java.util.List;
+
 import javax.transaction.Transactional;
 
 import org.springframework.data.domain.Page;
@@ -16,5 +18,7 @@ public interface IUtilisateurDao extends JpaRepository<Utilisateur, Long>{
 	@Query("select u from Utilisateur u where nom like :mc or prenom like :mc")
 	public Page<Utilisateur> getPage(@Param("mc") String mc, Pageable pageable);
 
+
+	public Utilisateur findByUsername(String username);
 
 }

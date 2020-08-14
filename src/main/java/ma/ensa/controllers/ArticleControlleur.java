@@ -113,7 +113,7 @@ public class ArticleControlleur {
 			System.out.println("article : "+article);
 			System.out.println(monArticle);
 			Article art = new Article();
-			List<Auteur> auteurs = monArticle.getCo_auters();
+			List<Referee> auteurs = monArticle.getCo_auters();
 			Auteur auteur = monArticle.getAuteurCorrespondant();
 			art.setTitre(monArticle.getTitre());
 			art.setAffiliations(monArticle.getAffiliations());
@@ -123,7 +123,7 @@ public class ArticleControlleur {
 		    art.setResume(monArticle.getResume());
 		    Article articleAjoutee = articleService.ajouterArticle(art);
 		    corresService.ajouterCorrespondance(new Correspondance(articleAjoutee, auteur, true));
-		    for (Auteur auteur2 : auteurs) {
+		    for (Referee auteur2 : auteurs) {
 		    	corresService.ajouterCorrespondance(new Correspondance(articleAjoutee, auteur2, false));
 			}
 			Files.write(Paths.get(articlesDirectory+file.getOriginalFilename()),file.getBytes());
@@ -137,7 +137,6 @@ public class ArticleControlleur {
 			art.setTitre(monArticle.getTitre());
 			art.setAffiliations(monArticle.getAffiliations());
 			art.setContenu(file.getOriginalFilename());
-			art.setEtat(monArticle.getEtat());
 		    art.setMotCle(monArticle.getMotCle());
 		    art.setResume(monArticle.getResume());
 		    Files.write(Paths.get(articlesDirectory+file.getOriginalFilename()),file.getBytes());

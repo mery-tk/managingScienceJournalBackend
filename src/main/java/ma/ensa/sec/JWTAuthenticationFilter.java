@@ -21,7 +21,6 @@ import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import ma.ensa.entities.Utilisateur;
 
-
 public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilter {
 
 	private AuthenticationManager authenticationManager;
@@ -30,57 +29,34 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
 		super();
 		this.authenticationManager = authenticationManager;
 	}
+
 	public JWTAuthenticationFilter() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
+
 	@Override
-	public Authentication attemptAuthentication(HttpServletRequest request,
-	HttpServletResponse response) throws AuthenticationException {
-	Utilisateur user=null;
-	try {
-	user = new ObjectMapper().readValue(request.getInputStream(), Utilisateur.class);
-	} catch (Exception e) {
-	throw new RuntimeException(e);
+	public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response)
+			throws AuthenticationException {
+		Utilisateur user = null;
+		try {
+			user = new ObjectMapper().readValue(request.getInputStream(), Utilisateur.class);
+		} catch (Exception e) {
+			throw new RuntimeException(e);
+		}
+		return authenticationManager
+				.authenticate(new UsernamePasswordAuthenticationToken(user.getUsername(), user.getPassword()));
 	}
-	return authenticationManager.authenticate(
-	new UsernamePasswordAuthenticationToken(
-	user.getUsername(),
-	user.getPassword()
-	));
-	}
-	
+
 	@Override
-	protected void successfulAuthentication(HttpServletRequest request, HttpServletResponse
-	response, FilterChain chain,
-	Authentication authResult) throws IOException, ServletException {
-	User springUser=(User)authResult.getPrincipal();
-	String jwtToken=Jwts.builder()
-	.setSubject(springUser.getUsername())
-	.setExpiration(new
-	Date(System.currentTimeMillis()+SecurityConstants.EXPIRATION_TIME))
-	.signWith(SignatureAlgorithm.HS512, SecurityConstants.SECRET)
-	.claim("roles", springUser.getAuthorities())
-	.compact();
-	response.addHeader(SecurityConstants.HEADER_STRING,
-	SecurityConstants.TOKEN_PREFIX+jwtToken);
-	}
+	protected void successfulAuthentication(HttpServletRequest request, HttpServletResponse response, FilterChain chain,
+			Authentication authResult) throws IOException, ServletException {
+		User springUser = (User) authResult.getPrincipal();
+		String jwtToken = Jwts.builder().setSubject(springUser.getUsername())
+				.setExpiration(new Date(System.currentTimeMillis() + SecurityConstants.EXPIRATION_TIME))
+				.signWith(SignatureAlgorithm.HS512, SecurityConstants.SECRET)
+				.claim("roles", springUser.getAuthorities()).compact();
+		response.addHeader(SecurityConstants.HEADER_STRING, SecurityConstants.TOKEN_PREFIX + jwtToken);
 	}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+}

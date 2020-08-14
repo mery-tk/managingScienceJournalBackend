@@ -44,7 +44,7 @@ public class Utilisateur {
 	private ComiteEditoriale comiteEditoriale;
 	
 	@ManyToMany(fetch = FetchType.EAGER)
-	private Collection<Role> roles=new ArrayList<>();
+	private Collection<Role> roles = new ArrayList<>();
 	
 	
 	

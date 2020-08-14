@@ -48,7 +48,7 @@ public class UtilisateurController {
 		
 		Role rol=roleDao.findByNomRole("UTILISATEUR");
 		utilisateur.getRoles().add(rol);
-System.out.println(utilisateur.getRoles());
+		System.out.println(utilisateur.getRoles());
 		System.out.println(rol.getId());
 		return utilisateurService.ajouterUtilisateur(utilisateur);
 	}

@@ -28,13 +28,16 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
+
+
+
 		http.csrf().disable()
 				// don't create session
 				.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and().authorizeRequests()
-				.antMatchers("/utilisateurs/**", "/auteurs/**","/articles/**").permitAll()
+				.antMatchers("/login/**").permitAll()
 				.anyRequest().permitAll().and()
 				.addFilter(new JWTAuthenticationFilter(authenticationManager()))
 				.addFilterBefore(new JWTAuthorizationFilter(), UsernamePasswordAuthenticationFilter.class);
-//		http.authorizeRequests().anyRequest().permitAll();
 	}
 }
+

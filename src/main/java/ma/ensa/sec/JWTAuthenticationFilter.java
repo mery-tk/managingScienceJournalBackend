@@ -32,7 +32,6 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
 
 	public JWTAuthenticationFilter() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	@Override

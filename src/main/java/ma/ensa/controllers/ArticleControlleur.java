@@ -190,7 +190,8 @@ public class ArticleControlleur {
 			List<Referee> listReferee=art.getReferees();
 			listReferee.addAll(referees);
 			art.setReferees(listReferee);		
-			Article a=articleService.modifierArticle(id, art);
+			art.setEtat("En cours d'evaluation par Referees");
+			Article a = articleService.modifierArticle(id, art);
 			
 			return a;
 		}

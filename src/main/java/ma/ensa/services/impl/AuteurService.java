@@ -2,6 +2,7 @@ package ma.ensa.services.impl;
 
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import ma.ensa.dao.IAuteurDao;
 import ma.ensa.entities.Article;
@@ -13,6 +14,7 @@ import ma.ensa.services.IAuteurService;
 public class AuteurService implements IAuteurService{
 
 	@Autowired private IAuteurDao auteurDao;
+	@Autowired private BCryptPasswordEncoder bCryptPasswordEncoder;
 
 	@Override
 	public List<Auteur> afficherAuteurs() {
@@ -26,6 +28,8 @@ public class AuteurService implements IAuteurService{
 
 	@Override
 	public Auteur ajouterAuteur(Auteur auteur) {
+		String passHash=bCryptPasswordEncoder.encode(auteur.getPassword());
+        auteur.setPassword(passHash);
 		return auteurDao.save(auteur);
 	}
 

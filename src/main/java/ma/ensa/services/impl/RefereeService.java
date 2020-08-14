@@ -2,6 +2,7 @@ package ma.ensa.services.impl;
 
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import ma.ensa.dao.IRefereeDao;
 import ma.ensa.entities.Referee;
@@ -9,7 +10,9 @@ import ma.ensa.services.IRefereeService;
 
 @Service
 public class RefereeService implements IRefereeService{
+	
 	@Autowired private IRefereeDao refereeDao;
+	@Autowired private BCryptPasswordEncoder bCryptPasswordEncoder;
 
 	@Override
 	public List<Referee> afficherReferees() {
@@ -23,6 +26,8 @@ public class RefereeService implements IRefereeService{
 
 	@Override
 	public Referee ajouterReferee(Referee referee) {
+		String passHash=bCryptPasswordEncoder.encode(referee.getPassword());
+        referee.setPassword(passHash);
 		return refereeDao.save(referee);
 	}
 

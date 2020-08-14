@@ -10,8 +10,8 @@ public class ArticleForm {
 	private String motCle;
 	private String contenu;
 	private String etat;
-	private Auteur auteurCorrespondant;
-	private List<Auteur> co_auters;
+	private Referee auteurCorrespondant;
+	private List<Referee> co_auters;
 	//private List<Referee> referees;
 	public String getTitre() {
 		return titre;
@@ -52,13 +52,13 @@ public class ArticleForm {
 	public Auteur getAuteurCorrespondant() {
 		return auteurCorrespondant;
 	}
-	public void setAuteurCorrespondant(Auteur auteurCorrespondant) {
+	public void setAuteurCorrespondant(Referee auteurCorrespondant) {
 		this.auteurCorrespondant = auteurCorrespondant;
 	}
-	public List<Auteur> getCo_auters() {
+	public List<Referee> getCo_auters() {
 		return co_auters;
 	}
-	public void setCo_auters(List<Auteur> co_auters) {
+	public void setCo_auters(List<Referee> co_auters) {
 		this.co_auters = co_auters;
 	}
 	public ArticleForm() {

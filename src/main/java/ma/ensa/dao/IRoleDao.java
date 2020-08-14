@@ -8,6 +8,7 @@ import ma.ensa.entities.Role;
 
 @Transactional
 public interface IRoleDao extends JpaRepository<Role, Long>{
+	
 	public Role findByNomRole(String nomRole);
 
 }

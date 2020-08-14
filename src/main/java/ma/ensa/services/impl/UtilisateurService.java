@@ -4,6 +4,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import ma.ensa.dao.IRoleDao;
@@ -18,6 +19,7 @@ public class UtilisateurService implements IUtilisateurService{
 
 	@Autowired private IUtilisateurDao utilisateurDao;
 	@Autowired private IRoleDao roleDao;
+	@Autowired private BCryptPasswordEncoder bCryptPasswordEncoder;
 	
 	@Override
 	public List<Utilisateur> afficherUtilisateurs() {
@@ -31,6 +33,8 @@ public class UtilisateurService implements IUtilisateurService{
 
 	@Override
 	public Utilisateur ajouterUtilisateur(Utilisateur utilisateur) {
+		String passHash=bCryptPasswordEncoder.encode(utilisateur.getPassword());
+        utilisateur.setPassword(passHash);
 		return utilisateurDao.save(utilisateur);
 	}
 
@@ -40,10 +44,12 @@ public class UtilisateurService implements IUtilisateurService{
 		user.setAdresse(utilisateur.getAdresse());
 		user.setEmail(utilisateur.getEmail());
 		user.setNom(utilisateur.getNom());
-		user.setPassword(utilisateur.getPassword());
+		String passHash=bCryptPasswordEncoder.encode(utilisateur.getPassword());
+        user.setPassword(passHash);
 		user.setPrenom(utilisateur.getPrenom());
 		user.setTelephone(utilisateur.getTelephone());
 		user.setUsername(utilisateur.getUsername());
+		user.setRoles(utilisateur.getRoles());
 		return utilisateurDao.save(user);
 	}
 
@@ -61,21 +67,19 @@ public class UtilisateurService implements IUtilisateurService{
 		return utilisateurDao.getPage(mc, pageable);
 	}
 
-	
+	@Override
+	public Utilisateur findUserByUsername(String username) {
+		return utilisateurDao.findByUsername(username);	
+	}
 
 	@Override
 	public void addRoleToUser(String username, String roleName) {
-		Role role=roleDao.findByNomRole(roleName);
-		Utilisateur utilisateur=utilisateurDao.findByUsername(username);
-		utilisateur.getRoles().add(role);
-		
-		
+		Role role = roleDao.findByNomRole(roleName);
+		Utilisateur utilisateur = this.findUserByUsername(username);
+		utilisateur.getRoles().add(role);	
+		this.modifierUtilisateur(utilisateur.getIdUtilisateur(), utilisateur);
 	}
 
-	@Override
-	public Utilisateur findUserByUsername(String username) {
-		return utilisateurDao.findByUsername(username);
-		
-	}
+	
 
 }

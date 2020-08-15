@@ -38,14 +38,11 @@ public class UtilisateurController {
 	
 	@PostMapping(value = "/utilisateurs")
 	public Utilisateur addUser(@RequestBody Utilisateur utilisateur) {
-		
 		String usernom=utilisateur.getUsername();
 		Utilisateur User=utilisateurService.findUserByUsername(usernom);
 		if(User!=null) {
 			throw new RuntimeException("Essayez un autre Username");	
 		}
-	
-		
 		Role rol=roleDao.findByNomRole("UTILISATEUR");
 		utilisateur.getRoles().add(rol);
 		System.out.println(utilisateur.getRoles());
@@ -69,6 +66,11 @@ public class UtilisateurController {
 			@RequestParam(name = "page", defaultValue = "0")int page,
 			@RequestParam(name = "size", defaultValue = "4")int size){
 		return utilisateurService.chercherUtilisateurs("%"+mc+"%", PageRequest.of(page, size));
+	}
+	
+	@GetMapping(value = "/utilisateur")
+	public Utilisateur getByUsername(@RequestParam String username) {
+		return utilisateurService.findUserByUsername(username);
 	}
 	
 }

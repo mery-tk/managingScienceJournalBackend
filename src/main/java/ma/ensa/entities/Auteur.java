@@ -3,12 +3,11 @@ package ma.ensa.entities;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
-import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.PrimaryKeyJoinColumn;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 
@@ -16,13 +15,9 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 @PrimaryKeyJoinColumn(name = "idAuteur")
 @Inheritance(strategy = InheritanceType.JOINED)
 public class Auteur extends Utilisateur{
-	
+ 
 	private int nbrArticlesEcrites = 0;
 	
-	
-//	@ManyToMany(mappedBy = "auteurs", fetch = FetchType.LAZY)
-//	@JsonIgnore
-//	private List<Article> articles = new ArrayList<Article>();
 	
 	
 	@OneToMany(mappedBy ="correspondance_PK.auteur")

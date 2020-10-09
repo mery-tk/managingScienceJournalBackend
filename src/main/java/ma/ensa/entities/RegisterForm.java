@@ -7,7 +7,7 @@ public class RegisterForm {
 	
 	public RegisterForm() {
 		super();
-		// TODO Auto-generated constructor stub
+	
 	}
 	
 	

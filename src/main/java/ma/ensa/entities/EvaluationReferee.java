@@ -8,6 +8,9 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.PrimaryKeyJoinColumn;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
+
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
 
@@ -15,8 +18,8 @@ import org.hibernate.annotations.LazyCollectionOption;
 @Entity
 @PrimaryKeyJoinColumn(name = "idEvaluationReferee")
 public class EvaluationReferee extends Evaluation {
-
 	private String qualificationReferee;
+	
 	public String commentaire;
 	public String rapport;
 

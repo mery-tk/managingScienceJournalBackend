@@ -5,10 +5,10 @@ import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.PrimaryKeyJoinColumn;
 
+
 @Entity
 @PrimaryKeyJoinColumn(name = "idAdmin")
 public class Administrateur extends Utilisateur {
-
 	private Date debutFonction;
 	private Date finFonction;
 	

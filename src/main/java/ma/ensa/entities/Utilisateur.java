@@ -3,7 +3,7 @@ package ma.ensa.entities;
 import java.util.ArrayList;
 import java.util.Collection;
 
-import javax.persistence.Column;
+
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -29,19 +29,19 @@ public class Utilisateur {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long idUtilisateur;
+	
 	private String nom;
 	private String prenom;
 	private String email;
 	private Long telephone;
 	private String adresse;
-	@Column(unique = true)
 	private String username;
 	private String password;
 	
 	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="idComite")
 	@JsonIgnore
-	private ComiteEditoriale comiteEditoriale;
+	private Comite comiteEditoriale;
 	
 	@ManyToMany(fetch = FetchType.EAGER)
 	private Collection<Role> roles = new ArrayList<>();
@@ -130,11 +130,11 @@ public class Utilisateur {
 		this.password = password;
 	}
 
-	public ComiteEditoriale getComiteEditoriale() {
+	public Comite getComiteEditoriale() {
 		return comiteEditoriale;
 	}
 
-	public void setComiteEditoriale(ComiteEditoriale comiteEditoriale) {
+	public void setComiteEditoriale(Comite comiteEditoriale) {
 		this.comiteEditoriale = comiteEditoriale;
 	}
 

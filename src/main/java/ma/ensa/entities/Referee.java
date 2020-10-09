@@ -7,15 +7,17 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.ManyToMany;
 import javax.persistence.PrimaryKeyJoinColumn;
+
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import net.bytebuddy.implementation.bind.annotation.IgnoreForBinding;
 
 
 @Entity
 @PrimaryKeyJoinColumn(name = "idReferee")
 public class Referee extends Auteur{
-
+	
+    
 	private int nbrArticlesEvaluees = 0;
 	
 	@ManyToMany(mappedBy = "referees", fetch = FetchType.LAZY)

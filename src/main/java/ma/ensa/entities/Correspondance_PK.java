@@ -9,18 +9,17 @@ import javax.persistence.ManyToOne;
 @Embeddable
 public class Correspondance_PK implements Serializable{
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
-	@ManyToOne
-	@JoinColumn(name = "idArticle")
-	private Article article;
 	
+
 	@ManyToOne
 	@JoinColumn(name = "idAuteur")
 	private Auteur auteur;
 
+	@ManyToOne
+	@JoinColumn(name = "idArticle")
+	private Article article;
+	
 	
 	
 	

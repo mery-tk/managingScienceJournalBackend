@@ -12,7 +12,6 @@ public class ArticleForm {
 	private String etat;
 	private Referee auteurCorrespondant;
 	private List<Referee> co_auters;
-	//private List<Referee> referees;
 	public String getTitre() {
 		return titre;
 	}
@@ -64,13 +63,7 @@ public class ArticleForm {
 	public ArticleForm() {
 		super();
 	}
-//	public List<Referee> getReferees() {
-//		return referees;
-//	}
-//	public void setReferees(List<Referee> referees) {
-//		this.referees = referees;
-//	}
-	
+
 	
 
 }

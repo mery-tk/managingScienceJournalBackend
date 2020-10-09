@@ -10,6 +10,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
+
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -26,20 +27,8 @@ public class Article {
 	private String contenu;
 	private String etat;
 	
-//	@ManyToMany
-//	@LazyCollection(LazyCollectionOption.FALSE)
-//	@JoinTable(name = "article_auteur",
-//	joinColumns = { @JoinColumn(name="idArticle")},
-//	inverseJoinColumns ={ @JoinColumn(name="idAuteur")} )
-//	private List<Auteur> auteurs;
+
 	
-	////////////////////////////
-	
-	
-	@OneToMany(mappedBy = "article")
-	@LazyCollection(LazyCollectionOption.FALSE)
-	@JsonIgnore
-	private  List<Evaluation> listEvaluation;
 	
 	
 	@OneToMany(mappedBy = "correspondance_PK.article")
@@ -54,7 +43,12 @@ public class Article {
 	 private List<Referee> referees;
 	
 	
-	/////////////////////////////
+	@OneToMany(mappedBy = "article")
+	@LazyCollection(LazyCollectionOption.FALSE)
+	@JsonIgnore
+	private  List<Evaluation> listEvaluation;
+	
+	
 	public Long getIdArticle() {
 		return idArticle;
 	}
@@ -131,13 +125,7 @@ public class Article {
 		this.referees = referees;
 	}
 
-//	@Override
-//	public String toString() {
-//		return "Article [idArticle=" + idArticle + ", titre=" + titre + ", affiliations=" + affiliations + ", resume="
-//				+ resume + ", motCle=" + motCle + ", contenu=" + contenu + ", etat=" + etat + ", auteurs=" + auteurs
-//				+ ", listEvaluation=" + listEvaluation + "]";
-//	}
-	
+
 	
 	
 

@@ -19,13 +19,13 @@ public class Evaluation {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long idEvaluation;
 	
-	//////////////////////////////
+	
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JsonIgnore
 	@JoinColumn(name = "idArticle")
 	private Article article;
 	
-	/////////////////////////
+
 	public Long getIdEvaluation() {
 		return idEvaluation;
 	}

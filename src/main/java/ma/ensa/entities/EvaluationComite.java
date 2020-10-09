@@ -3,21 +3,23 @@ package ma.ensa.entities;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
+import javax.persistence.ManyToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @PrimaryKeyJoinColumn(name = "idEvaluationComite")
 public class EvaluationComite extends Evaluation {
-	
+
    private String qualificationComite;
    
-   @OneToOne(fetch = FetchType.EAGER)
+   @ManyToOne(fetch = FetchType.EAGER)
    @JsonIgnore
    @JoinColumn(name ="idComite" )
-   private ComiteEditoriale comite;
+   private Comite comite;
    
    
    
@@ -39,11 +41,11 @@ public EvaluationComite() {
 	super();
 }
 
-public ComiteEditoriale getComite() {
+public Comite getComite() {
 	return comite;
 }
 
-public void setComite(ComiteEditoriale comite) {
+public void setComite(Comite comite) {
 	this.comite = comite;
 }
    

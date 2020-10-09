@@ -2,10 +2,9 @@ package ma.ensa.entities;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.Table;
+
 
 @Entity
-@Table(name="Correspondance") 
 public class Correspondance {
 
 	@Id
